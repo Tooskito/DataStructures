@@ -49,7 +49,6 @@ intPtr.o: intPtr.cpp
 	$(PP) $(CXXFLAGS) -c intPtr.cpp
 
 
-
 # Make all
 all: nothing hello intPtr
 
