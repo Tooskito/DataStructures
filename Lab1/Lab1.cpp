@@ -1,5 +1,16 @@
 #include "Lab1.h"
+/**
+ *  File:   Lab1.cpp
+ *  Author: Jonathan Abbott
+ *  Email:  jabbott4@nd.edu
+ *  
+ *  This file implements "pollInput" (along with a helper
+ *  function named "noBadCharsIn") which is required for
+ *  Lab1 to gather user-input.
+ */
 
+
+//  See: "noBadCharsIn" in "Lab1.h"
 bool noBadCharsIn(const STRING &s) {
     bool haveSeenDecimalPoint = false;
     for (size_t i = 0; i < s.length(); ++i) {
@@ -21,6 +32,8 @@ bool noBadCharsIn(const STRING &s) {
     return true;
 }
 
+
+//  See: "pollInput" in "Lab1.h"
 int pollInput(  unsigned long int &uli,
                 float &f,
                 double &d,
@@ -72,6 +85,7 @@ int pollInput(  unsigned long int &uli,
     if (CIN >> c) {
         COUT << "Received a char with repr: " << c << ENDL;
     } else {
+        // If there is an error, or an end-of-file is reached, return early with error code.
         CERR << "Not a valid character." << ENDL;
         return INPUT_ERR;
     }

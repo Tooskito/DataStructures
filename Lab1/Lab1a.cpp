@@ -1,13 +1,53 @@
 #include "Lab1.h"
+/**
+ *  File:   Lab1a.cpp
+ *  Author: Jonathan Abbott
+ *  Email:  jabbott4@nd.edu
+ *  
+ *  This file implements Lab1a, storing user-input in
+ *  the Data Heap, and using pointer-arithmetic to
+ *  print it out.
+ */
 
+
+/**
+ *  Function Name:  setNodeValues
+ *  Pre-conditions: void *loc,
+ *                  unsigned long int &uli,
+ *                  float &f,
+ *                  double &d,
+ *                  char &c
+ *  Post-condition: none
+ * 
+ *  Takes a void pointer to a memory location on the 
+ *  Data Heap and fills it with parameters.
+ */
 void setNodeValues( const void *loc,
                     const unsigned long int &uli,
                     const float &f,
                     const double &d,
                     const char &c);
 
+
+/**
+ *  Function Name:  printNodeValues
+ *  Pre-conditions: void *loc
+ *  Post-condition: none
+ * 
+ *  Takes a void pointer to a memory location on the
+ *  Data Heap and, using pointer arithmetic, prints
+ *  out contiguous values.
+ */
 void printNodeValues(void *loc);
 
+
+/**
+ *  Function Name:  main
+ *  Pre-conditions: none
+ *  Post-condition: int
+ *  
+ *  This is the entry point of the program.
+ */
 int main(int argc, char** argv) {
     // Define general local variables.
     unsigned long int uli;
@@ -33,6 +73,7 @@ int main(int argc, char** argv) {
 }
 
 
+//  See: "setNodeValues" declaration above.
 void setNodeValues( const void *loc,
                     const unsigned long int &uli,
                     const float &f,
@@ -41,7 +82,7 @@ void setNodeValues( const void *loc,
     // To allow pointer arithmetic, because a character is, and always will be, 1-byte wide.
     char *ref = (char *)loc;
 
-    // De-reference, set, advance => repeat redundantly and trivially.
+    // De-reference, set, and advance pointer => repeat both redundantly and trivially.
     *( (unsigned long int *)ref ) = uli;
     ref += sizeof(unsigned long int);
 
@@ -54,13 +95,19 @@ void setNodeValues( const void *loc,
     *( (char *)ref ) = c;
 }
 
+
+//  See: "printNodeValues" declaration above.
 void printNodeValues(void *loc) {
     // To allow pointer arithmetic, because a character is, and always will be, 1-byte wide.
     char *ref = (char *)loc;
 
+    // Note that we also have to cast to (void *) because I do not want the register of "ref"
+    // so I cannot go "&ref", and I cannot just use ref because "char *"s are treated differently
+    // than other pointers.
     COUT << "-----------------------------" << ENDL;
 	COUT << "Initial address of reference: " << (void *)ref << ENDL << ENDL;	
 	
+    // Cast to void pointer, print, advance char pointer => rinse and repeat.
     COUT << "Unsigned long int: " << *( (unsigned long int *)ref ) << " at address: " << (void *)ref << ENDL;
     ref += sizeof(unsigned long int);
 
@@ -72,6 +119,6 @@ void printNodeValues(void *loc) {
 
     COUT << "Char: " << *( (char *)ref ) << " at address: " << (void *)ref << ENDL;
 
-	COUT << "Final address of reference: " << ref << ENDL;	
+	COUT << "Final address of reference: " << (void *)ref << ENDL;	
     COUT << "-----------------------------" << ENDL;
 }
