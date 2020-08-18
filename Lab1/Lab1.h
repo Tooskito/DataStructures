@@ -3,7 +3,8 @@
  *  Author: Jonathan Abbott
  *  Email:  jabbott4@nd.edu
  *  
- *  This is the header (declaration) file for "Lab1.cpp"
+ *  This is the header (declaration) file for "Lab1.cpp", and
+ *  is included in each Lab1[a-c] file.
  */
 
 #include <iostream>

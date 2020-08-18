@@ -111,7 +111,7 @@ void printNodeValues(void *loc) {
     COUT << "Unsigned long int: " << *( (unsigned long int *)ref ) << " at address: " << (void *)ref << ENDL;
     ref += sizeof(unsigned long int);
 
-    COUT << "Float: " << *( (float *)ref ) << "at address: " << (void *)ref << ENDL;
+    COUT << "Float: " << *( (float *)ref ) << " at address: " << (void *)ref << ENDL;
     ref += sizeof(float);
 
     COUT << "Double: " << *( (double *)ref ) << " at address: " << (void *)ref << ENDL;

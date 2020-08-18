@@ -38,6 +38,8 @@ struct Node {
         COUT << "Float: " << this->theFloat << " at address " << &(this->theFloat) << ENDL;
         COUT << "Double: " << this->theDouble << " at address " << &(this->theDouble) << ENDL;
         COUT << "Char: " << this->theChar << " at address " << ( (void *)&(this->theChar) ) << ENDL;
+
+		COUT << "-----------------------------" << ENDL;
 	}
 };
 

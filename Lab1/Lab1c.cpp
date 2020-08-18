@@ -41,6 +41,8 @@ public:
         COUT << "Float: " << theFloat << " at address " << &theFloat << ENDL;
         COUT << "Double: " << theDouble << " at address " << &theDouble << ENDL;
         COUT << "Char: " << theChar << " at address " << ( (void *)&theChar ) << ENDL;
+
+		COUT << "-----------------------------" << ENDL;
 	}
 };
 
