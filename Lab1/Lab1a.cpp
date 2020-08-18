@@ -104,21 +104,19 @@ void printNodeValues(void *loc) {
     // Note that we also have to cast to (void *) because I do not want the register of "ref"
     // so I cannot go "&ref", and I cannot just use ref because "char *"s are treated differently
     // than other pointers.
-    COUT << "-----------------------------" << ENDL;
-	COUT << "Initial address of reference: " << (void *)ref << ENDL << ENDL;	
+	COUT << ENDL << "Initial address of reference: " << (void *)ref << ENDL << ENDL;	
 	
     // Cast to void pointer, print, advance char pointer => rinse and repeat.
-    COUT << "Unsigned long int: " << *( (unsigned long int *)ref ) << " at address: " << (void *)ref << ENDL;
+    COUT << "Long Unsigned Int\t: " << *( (unsigned long int *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(unsigned long int);
 
-    COUT << "Float: " << *( (float *)ref ) << " at address: " << (void *)ref << ENDL;
+    COUT << "Float\t\t\t: " << *( (float *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(float);
 
-    COUT << "Double: " << *( (double *)ref ) << " at address: " << (void *)ref << ENDL;
+    COUT << "Double\t\t\t: " << *( (double *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(double);
 
-    COUT << "Char: " << *( (char *)ref ) << " at address: " << (void *)ref << ENDL;
+    COUT << "Char\t\t\t: " << *( (char *)ref ) << " at address " << (void *)ref << ENDL << ENDL;
 
-	COUT << "Final address of reference: " << (void *)ref << ENDL;	
-    COUT << "-----------------------------" << ENDL;
+	COUT << "Final address of reference: " << (void *)ref << ENDL << ENDL;
 }

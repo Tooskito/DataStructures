@@ -33,16 +33,14 @@ public:
     
     // Class methods.
 	void printNodeValues(){
-		COUT << "-----------------------------" << ENDL;
+		COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
 
         // Without using "this", simply print members and their addresses.
-        COUT << "Unsigned long int: " << theUnsigLongInt << " at address " << &theUnsigLongInt << ENDL;
-        COUT << "Float: " << theFloat << " at address " << &theFloat << ENDL;
-        COUT << "Double: " << theDouble << " at address " << &theDouble << ENDL;
-        COUT << "Char: " << theChar << " at address " << ( (void *)&theChar ) << ENDL;
-
-		COUT << "-----------------------------" << ENDL;
+        COUT << "Long Unsigned Int\t: " << theUnsigLongInt << " at address " << &theUnsigLongInt << ENDL;
+        COUT << "Float\t\t\t: " << theFloat << " at address " << &theFloat << ENDL;
+        COUT << "Double\t\t\t: " << theDouble << " at address " << &theDouble << ENDL;
+        COUT << "Char\t\t\t: " << theChar << " at address " << ( (void *)&theChar ) << ENDL << ENDL;
 	}
 };
 

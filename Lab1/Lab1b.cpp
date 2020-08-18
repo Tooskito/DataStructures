@@ -30,17 +30,15 @@ struct Node {
     
     // Struct methods.
 	void printNodeValues(){
-		COUT << "-----------------------------" << ENDL;
+		COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
 
         // Print out address of each member.
-        COUT << "Unsigned long int: " << this->theUnsigLongInt << " at address " << &(this->theUnsigLongInt) << ENDL;
-        COUT << "Float: " << this->theFloat << " at address " << &(this->theFloat) << ENDL;
-        COUT << "Double: " << this->theDouble << " at address " << &(this->theDouble) << ENDL;
-        COUT << "Char: " << this->theChar << " at address " << ( (void *)&(this->theChar) ) << ENDL;
-
-		COUT << "-----------------------------" << ENDL;
-	}
+        COUT << "Long Unsigned Int\t: " << this->theUnsigLongInt << " at address " << &(this->theUnsigLongInt) << ENDL;
+        COUT << "Float\t\t\t: " << this->theFloat << " at address " << &(this->theFloat) << ENDL;
+        COUT << "Double\t\t\t: " << this->theDouble << " at address " << &(this->theDouble) << ENDL;
+        COUT << "Char\t\t\t: " << this->theChar << " at address " << ( (void *)&(this->theChar) ) << ENDL << ENDL;
+	}   
 };
 
 
