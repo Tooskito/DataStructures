@@ -29,7 +29,6 @@ int pollInput(  unsigned long int &uli,
     STRING strUnsigLongInt;
     STRING strFloat;
     STRING strDouble;
-    STRING strChar;
 
     // Capture unsigned long integer and verify it is an unsigned long integer.
     COUT << "Input an unsigned long integer: ";
