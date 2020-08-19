@@ -42,13 +42,15 @@ int pollInput(  unsigned long int &uli,
     STRING strUnsigLongInt;
     STRING strFloat;
     STRING strDouble;
+    STRING strChar;
 
     // Capture unsigned long integer and verify it is an unsigned long integer.
     COUT << "Input an unsigned long integer: ";
     CIN >> strUnsigLongInt;
     if (SSTREAM(strUnsigLongInt) >> uli
             && noBadCharsIn(strUnsigLongInt)
-            && strUnsigLongInt.find('.') == STRING::npos) {
+            && strUnsigLongInt.find('.') == STRING::npos
+            && strUnsigLongInt.find('-') == STRING::npos) {
         COUT << "Received an unsigned long integer with value: " << uli << ENDL;
     } else {
         // If it is not a valid unsigned long integer, return early with an error code.
@@ -82,11 +84,13 @@ int pollInput(  unsigned long int &uli,
 
     // Capture a char and verify it is so.
     COUT << "Input a char: ";
-    if (CIN >> c) {
+    CIN >> strChar;
+    if (strChar.length() == 1
+            && SSTREAM(strChar) >> c) {
         COUT << "Received a char with repr: " << c << ENDL;
     } else {
         // If there is an error, or an end-of-file is reached, return early with error code.
-        CERR << "Not a valid character." << ENDL;
+        CERR << strChar << " is not a valid character." << ENDL;
         return INPUT_ERR;
     }
 

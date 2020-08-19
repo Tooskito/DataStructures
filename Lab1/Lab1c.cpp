@@ -3,10 +3,12 @@
  *  File:   Lab1c.cpp
  *  Author: Jonathan Abbott
  *  Email:  jabbott4@nd.edu
- *  
+ * 
  *  This file implements Lab1c. It stores user-input in a
  *  class, whose members are printed out via method call.
  *  This file also presents proper data hiding and encapsulation.
+ *  Credit is due to Prof. Morrison who's examples inspired
+ *  much of what is in here.
  */
 
 
@@ -27,20 +29,20 @@ private:
     double theDouble;
     char theChar;
 public:
-    // Constructor.
+    // Constructor from Prof. Morrison's example.
     Node(unsigned long int uli, float f, double d, char c)
         : theUnsigLongInt(uli), theFloat(f), theDouble(d), theChar(c) {}
     
-    // Class methods.
+    // Class methods inspired by Prof. Morrison's examples.
 	void printNodeValues(){
 		COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
 
         // Without using "this", simply print members and their addresses.
-        COUT << "Long Unsigned Int\t: " << theUnsigLongInt << " at address " << &theUnsigLongInt << ENDL;
-        COUT << "Float\t\t\t: " << theFloat << " at address " << &theFloat << ENDL;
-        COUT << "Double\t\t\t: " << theDouble << " at address " << &theDouble << ENDL;
-        COUT << "Char\t\t\t: " << theChar << " at address " << ( (void *)&theChar ) << ENDL << ENDL;
+        COUT << "Long Unsigned Int: " << theUnsigLongInt << " at address " << &theUnsigLongInt << ENDL;
+        COUT << "Float            : " << theFloat << " at address " << &theFloat << ENDL;
+        COUT << "Double           : " << theDouble << " at address " << &theDouble << ENDL;
+        COUT << "Char             : " << theChar << " at address " << ( (void *)&theChar ) << ENDL << ENDL;
 	}
 };
 
@@ -52,6 +54,7 @@ public:
  *  
  *  This is the entry point of the program.
  */
+//  Commenting style inspired by Prof. Morrison.
 int main() {
     // Define general local variables.
     unsigned long int uli;

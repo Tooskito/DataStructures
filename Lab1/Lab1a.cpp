@@ -6,7 +6,8 @@
  *  
  *  This file implements Lab1a, storing user-input in
  *  the Data Heap, and using pointer-arithmetic to
- *  print it out.
+ *  print it out. Credit is due to Prof. Morrison who's 
+ *  examples inspired much of what is in here.
  */
 
 
@@ -22,6 +23,7 @@
  *  Takes a void pointer to a memory location on the 
  *  Data Heap and fills it with parameters.
  */
+//  Based on Prof. Morrison's example.
 void setNodeValues( const void *loc,
                     const unsigned long int &uli,
                     const float &f,
@@ -38,6 +40,7 @@ void setNodeValues( const void *loc,
  *  Data Heap and, using pointer arithmetic, prints
  *  out contiguous values.
  */
+//  Based on Prof. Morrison's example.
 void printNodeValues(void *loc);
 
 
@@ -48,6 +51,7 @@ void printNodeValues(void *loc);
  *  
  *  This is the entry point of the program.
  */
+//  Commenting style inspired by Prof. Morrison.
 int main(int argc, char** argv) {
     // Define general local variables.
     unsigned long int uli;
@@ -107,16 +111,16 @@ void printNodeValues(void *loc) {
 	COUT << ENDL << "Initial address of reference: " << (void *)ref << ENDL << ENDL;	
 	
     // Cast to void pointer, print, advance char pointer => rinse and repeat.
-    COUT << "Long Unsigned Int\t: " << *( (unsigned long int *)ref ) << " at address " << (void *)ref << ENDL;
+    COUT << "Long Unsigned Int: " << *( (unsigned long int *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(unsigned long int);
 
-    COUT << "Float\t\t\t: " << *( (float *)ref ) << " at address " << (void *)ref << ENDL;
+    COUT << "Float            : " << *( (float *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(float);
 
-    COUT << "Double\t\t\t: " << *( (double *)ref ) << " at address " << (void *)ref << ENDL;
+    COUT << "Double           : " << *( (double *)ref ) << " at address " << (void *)ref << ENDL;
     ref += sizeof(double);
 
-    COUT << "Char\t\t\t: " << *( (char *)ref ) << " at address " << (void *)ref << ENDL << ENDL;
+    COUT << "Char             : " << *( (char *)ref ) << " at address " << (void *)ref << ENDL << ENDL;
 
 	COUT << "Final address of reference: " << (void *)ref << ENDL << ENDL;
 }

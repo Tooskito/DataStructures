@@ -6,7 +6,8 @@
  *  
  *  This file implements Lab1b. It stores user-input
  *  in a struct, whose members are printed out via
- *  method call.
+ *  method call. Credit is due to Prof. Morrison who's 
+ *  examples inspired much of what is in here.
  */
 
 
@@ -24,20 +25,20 @@ struct Node {
     double theDouble;
     char theChar;
 
-    // Constructor.
+    // Constructor from Prof. Morrison's example.
     Node(unsigned long int uli, float f, double d, char c)
         : theUnsigLongInt(uli), theFloat(f), theDouble(d), theChar(c) {}
     
-    // Struct methods.
+    // Struct methods from Prof. Morrison's example.
 	void printNodeValues(){
 		COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
 
         // Print out address of each member.
-        COUT << "Long Unsigned Int\t: " << this->theUnsigLongInt << " at address " << &(this->theUnsigLongInt) << ENDL;
-        COUT << "Float\t\t\t: " << this->theFloat << " at address " << &(this->theFloat) << ENDL;
-        COUT << "Double\t\t\t: " << this->theDouble << " at address " << &(this->theDouble) << ENDL;
-        COUT << "Char\t\t\t: " << this->theChar << " at address " << ( (void *)&(this->theChar) ) << ENDL << ENDL;
+        COUT << "Long Unsigned Int: " << this->theUnsigLongInt << " at address " << &(this->theUnsigLongInt) << ENDL;
+        COUT << "Float            : " << this->theFloat << " at address " << &(this->theFloat) << ENDL;
+        COUT << "Double           : " << this->theDouble << " at address " << &(this->theDouble) << ENDL;
+        COUT << "Char             : " << this->theChar << " at address " << ( (void *)&(this->theChar) ) << ENDL << ENDL;
 	}   
 };
 
@@ -49,6 +50,7 @@ struct Node {
  *  
  *  This is the entry point of the program.
  */
+//  Commenting style inspired by Prof. Morrison.
 int main() {
     // Define general local variables.
     unsigned long int uli;
