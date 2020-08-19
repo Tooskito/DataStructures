@@ -37,7 +37,7 @@ public:
     }
 
     // Friend operator to output variables using COUT.
-    friend OSTREAM& operator<< (OSTREAM& out, Node& n) {
+    friend OSTREAM& operator<< (OSTREAM& out, const Node& n) {
         // Without using "this", simply print members and their addresses.
         out << "Long Unsigned Int: " << n.theUnsigLongInt << " at address " << &n.theUnsigLongInt << ENDL;
         out << "Float            : " << n.theFloat << " at address " << &n.theFloat << ENDL;
