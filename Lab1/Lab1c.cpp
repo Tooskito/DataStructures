@@ -35,11 +35,6 @@ public:
         COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
     }
-    
-    // Class methods inspired by Prof. Morrison's examples.
-	void printNodeValues(){
-        
-	}
 
     // Friend operator to output variables using COUT.
     friend OSTREAM& operator<< (OSTREAM& out, Node& n) {
