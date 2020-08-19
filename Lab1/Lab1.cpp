@@ -48,7 +48,8 @@ int pollInput(  unsigned long int &uli,
     CIN >> strUnsigLongInt;
     if (SSTREAM(strUnsigLongInt) >> uli
             && noBadCharsIn(strUnsigLongInt)
-            && strUnsigLongInt.find('.') == STRING::npos) {
+            && strUnsigLongInt.find('.') == STRING::npos
+            && strUnsigLongInt.find('-') == STRING::npos) {
         COUT << "Received an unsigned long integer with value: " << uli << ENDL;
     } else {
         // If it is not a valid unsigned long integer, return early with an error code.
