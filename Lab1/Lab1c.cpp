@@ -31,19 +31,21 @@ private:
 public:
     // Constructor from Prof. Morrison's example.
     Node(unsigned long int uli, float f, double d, char c)
-        : theUnsigLongInt(uli), theFloat(f), theDouble(d), theChar(c) {}
-    
-    // Class methods inspired by Prof. Morrison's examples.
-	void printNodeValues(){
-		COUT << ENDL << "-----------------------------" << ENDL;
+        : theUnsigLongInt(uli), theFloat(f), theDouble(d), theChar(c) {
+        COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
+    }
 
+    // Friend operator to output variables using COUT.
+    friend OSTREAM& operator<< (OSTREAM& out, const Node& n) {
         // Without using "this", simply print members and their addresses.
-        COUT << "Long Unsigned Int: " << theUnsigLongInt << " at address " << &theUnsigLongInt << ENDL;
-        COUT << "Float            : " << theFloat << " at address " << &theFloat << ENDL;
-        COUT << "Double           : " << theDouble << " at address " << &theDouble << ENDL;
-        COUT << "Char             : " << theChar << " at address " << ( (void *)&theChar ) << ENDL << ENDL;
-	}
+        out << "Long Unsigned Int: " << n.theUnsigLongInt << " at address " << &n.theUnsigLongInt << ENDL;
+        out << "Float            : " << n.theFloat << " at address " << &n.theFloat << ENDL;
+        out << "Double           : " << n.theDouble << " at address " << &n.theDouble << ENDL;
+        out << "Char             : " << n.theChar << " at address " << ( (void *)&n.theChar ) << ENDL;
+        // Return OSTREAM for chaining.
+        return out;
+    }
 };
 
 
@@ -70,9 +72,7 @@ int main() {
     Node node(uli, f, d, c);
 
     // Print out node's properties.
-    COUT << "Node is at address: " << &node << ENDL;
-    node.printNodeValues();
-    COUT << ENDL;
+    COUT << node << ENDL;
 
     // Exit program cleanly.
     return EXIT_SUCCESS;

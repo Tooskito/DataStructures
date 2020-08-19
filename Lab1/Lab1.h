@@ -15,6 +15,7 @@
 
 // For ease of use without `using namespace std;`
 #define SSTREAM std::stringstream
+#define OSTREAM std::ostream
 #define STRING std::string
 #define COUT std::cout
 #define CERR std::cerr
@@ -39,6 +40,7 @@
  *  returns INPUT_ERR if user-input is invalid. Otherwise,
  *  returns INPUT_OK.
  */
+//  Commenting style inspired by Prof. Morrison.
 int pollInput(  unsigned long int &uli,
                 float &f,
                 double &d,
@@ -54,4 +56,5 @@ int pollInput(  unsigned long int &uli,
  *  or '-' appears in the string. Also returns false if
  *  '.' appears more than once.
  */
+//  Based on Prof. Morrison's function.
 bool noBadCharsIn(const STRING &s);
