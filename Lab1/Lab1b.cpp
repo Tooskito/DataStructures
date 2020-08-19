@@ -6,7 +6,8 @@
  *  
  *  This file implements Lab1b. It stores user-input
  *  in a struct, whose members are printed out via
- *  method call.
+ *  method call. Credit is due to Prof. Morrison who's 
+ *  examples inspired much of what is in here.
  */
 
 
@@ -24,11 +25,11 @@ struct Node {
     double theDouble;
     char theChar;
 
-    // Constructor.
+    // Constructor from Prof. Morrison's example.
     Node(unsigned long int uli, float f, double d, char c)
         : theUnsigLongInt(uli), theFloat(f), theDouble(d), theChar(c) {}
     
-    // Struct methods.
+    // Struct methods from Prof. Morrison's example.
 	void printNodeValues(){
 		COUT << ENDL << "-----------------------------" << ENDL;
 		COUT << "Initial address of 'this': " << this << ENDL << ENDL;	
@@ -49,6 +50,7 @@ struct Node {
  *  
  *  This is the entry point of the program.
  */
+//  Commenting style inspired by Prof. Morrison.
 int main() {
     // Define general local variables.
     unsigned long int uli;
