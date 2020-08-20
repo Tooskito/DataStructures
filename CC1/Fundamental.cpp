@@ -25,7 +25,6 @@ public:
         int prevRowStart = 0;
         int currRowStart = 1;
         for (int dataIndex = 1; dataIndex < length; ++dataIndex) {
-            std::cout << "prev: " << prevRowStart << " curr: " << currRowStart << std::endl;
             int prevRowLen = currRowStart - prevRowStart;
             int currRowLen = prevRowLen + 1;
             
@@ -59,6 +58,6 @@ public:
     }
 };
 int main() {
-    Pascal p(7);
+    Pascal p(20);
     std::cout << p << std::endl;
 }
