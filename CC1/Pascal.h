@@ -1,63 +1,126 @@
-#include <iostream>
-#include <cstdlib>
+/**
+ *  @author Jonathan Abbott
+ *  @date   Aug 23, 2020
+ *  
+ *  This file holds the declarations for all Pascal's Triangle functionality.
+ */
 
-// Standard include protection.
-#ifndef _PASCAL_H
-#define _PASCAL_H
 
-// For use in `getTriangleMember`.
-#define ROW_INVALID -1
-#define COL_INVALID -2
+#include <cstdlib>  // For `malloc`.
+#include <climits>  // For `UINT_MAX`.
+#include <iostream> // For i.e. `std::cout`
 
-// Instead of typing out `unsigned int`.
-typedef unsigned int uint;
 
+// For readability of function error codes.
+#ifndef SUCCESS
+#define SUCCESS 0
+#endif
+
+#ifndef FAILURE
+#define FAILURE 1
+#endif
+
+
+// Classic include guarding (ensures singular include).
+#ifndef CC1_PASCAL_H_
+#define CC1_PASCAL_H_
+
+
+// So we can put all triangle-related functions in one namespace.
 namespace Pascal {
+
+
     /**
-     *  Function Name:      createTriangle
-     *  Pre-Conditions:     unsigned int
-     *  Post-Conditions:    unsigned int **
+     *  Allocates a triangle structure with a given height.
+     * 
+     *  @param height The height of the triangle a.k.a. how many rows.
+     *  @return A multi-dimensional unsigned int pointer.
+     */
+    unsigned int ** AllocTriangle(unsigned int height);
+
+
+    /**
+     *  De-allocates a dynamically allocated triangle structure with a given height.
+     * 
+     *  @param triangle The multi-dimensional pointer to the structure.
+     *  @param height How many rows the structure has.
+     */
+    void FreeTriangle(unsigned int ** triangle, unsigned int height);
+
+
+    /**
+     *  Fills a triangle structure with Pascal's triangle values.
      *  
-     *  Allocates and creates a Pascal's triangle with a given height,
-     *  and returns a pointer to the structure.
+     *  @param triangle The triangle structure to fill.
+     *  @param height And how many rows that structure has.
+     *  @return `FAILURE` on overflow. otherwise, `SUCCESS`
      */
-    uint **createTriangle(uint);
+    int FillTriangle(unsigned int ** triangle, unsigned int height);
 
 
     /**
-     *  Function Name:      getTriangleMember
-     *  Pre-Conditions:     unsigned int **, unsigned int, long, long
-     *  Post-Conditions:    long
-     *
-     *  Given a pointer to a Pascal's triangle structure, its height, and
-     *  a row and column, returns the value of the Pascal's triangle's
-     *  member at that 1-indexed position. If the given row is not valid,
-     *  returns ROW_INVALID and if the given col is not valid, returns COL_INVALID.
-     *  ROW_INVALID has greater priority than COL_INVALID.
+     *  Allocates, fills, and returns a Pascal's triangle structure.
+     * 
+     *  @param height How many rows the structure should have.
+     *  @return A multi-dimensional pointer to the structure, or `nullptr` on failure.
      */
-    long getTriangleMember(uint **, uint, long, long);
+    unsigned int ** CreateTriangle(unsigned int height);
 
 
     /**
-     *  Function Name:      printTriangle
-     *  Pre-Conditions:     unsigned int **, unsigned int
-     *  Post-Conditions:    none
-     *
-     *  Given a pointer to a Pascal's triangle structure and its height,
-     *  prints the triangle.
+     *  Prints a triangle into standard output.
+     * 
+     *  @param triangle The pointer to the triangle structure.
+     *  @param height How many rows that triangle has.
      */
-    void printTriangle(uint **, uint);
+    void PrintTriangle(unsigned int ** triangle, unsigned int height);
 
 
     /**
-     *  Function Name:      destroyTriangle
-     *  Pre-Conditions:     unsigned int **, unsigned int
-     *  Post-Conditions:    none
+     *  Retrieves the member of a triangle structure.
      *  
-     *  Given a pointer to a Pascal's triangle structure and its height,
-     *  destroys and deallocates the triangle.
+     *  @param triangle The pointer to the triangle structure.
+     *  @param height How many rows that triangle has.
+     *  @param row The requested 1-indexed row.
+     *  @param col The requested 1-indexed column.
+     *  @param out THE MEMBER ("true output") WILL BE STORED HERE.
+     *  @return `FAILURE` on invalid indices. otherwise, `SUCCESS`.
      */
-    void destroyTriangle(uint **, uint);
+    int GetTriangleMember(
+        unsigned int ** triangle, 
+        unsigned int height, 
+        unsigned int row, 
+        unsigned int col, 
+        unsigned int & out
+    );
 }
+
+
+/**
+ *  Prompts user for height of the triangle and stores the response.
+ * 
+ *  @param height Where the user's input will be stored.
+ *  @return `FAILURE` if height < 1 or input failure. otherwise, `SUCCESS`.
+ */
+int PollHeight(unsigned int & height);
+
+
+/**
+ *  Prompts user for a row and column of the triangle and stores the response.
+ * 
+ *  @param row Where the user's input for a row will be stored.
+ *  @param col Where the user's input for a column will be stored.
+ *  @return `FAILURE` if input failure or input < 1. otherwise, `SUCCESS`.
+ */
+int PollIndex(unsigned int & row, unsigned int & col);
+
+
+/**
+ *  Prompts user if they would like to continue and returns their response.
+ *  
+ *  @return `true` if user would like to continue. else, `false`.
+ */
+bool PollContinue();
+
 
 #endif

@@ -1,13 +1,16 @@
 /**
  *  @author Jonathan Abbott
  *  @date   Aug 23, 2020
- *  
- *  This `main` file demonstrates Pascal's Triangle functionality implemented
- *  in `Pascal.cpp` via user interaction.
+ * 
+ *  This `main` file demonstrates Prime-checking via Pascal's Triangle
+ *  implemented in `Prime.cpp` via user-interaction.
  */
 
-#include <iostream> // For I/O, i.e. std::cout.
+
+#include <iostream> // For i.e. `std::cout`
 #include "Pascal.h" // For Pascal's Triangle functionality.
+#include "Prime.h"  // For Prime-checking functionality.
+
 
 
 /**
@@ -25,17 +28,17 @@ int main() {
     }
     // otherwise, `height` is now >= 1.
 
-    
+
     // `CreateTriangle` will return `nullptr` if there was overflow due to addition.
     unsigned int ** triangle;
     triangle = Pascal::CreateTriangle(height);
     if ( triangle == nullptr ) {
-        std::cerr << "height too big. integer overflow" << std::endl;
+        std::cerr << "height too big" << std::endl;
         return FAILURE;
     }
     // otherwise, `triangle` now holds a multi-dimensional pointer.
 
-    
+
     // we pass in `height` here because `PrintTriangle` has no idea how big our `triangle` is.
     Pascal::PrintTriangle(triangle, height);
 
@@ -44,37 +47,40 @@ int main() {
     while ( true ) {
 
 
-        // `PollIndex` will return FAILURE if input fails or input < 1.
-        //      "Hint 1: You may assume that the user will not enter a 
-        //       value less than 1, or an invalid integer" -CC1 Document
-        unsigned int row, col;
-        if ( PollIndex(row, col) != SUCCESS ) {
+        // `PollNumber` returns `FAILURE` if input failure or input < 0.
+        unsigned int number;
+        if ( PollNumber(number) != SUCCESS ) {
             std::cerr << "error reading input" << std::endl;
             return FAILURE;
         }
-        // otherwise, `row` and `col` now hold a positive value.
+        // else, `number` holds positive number to check for primality.
 
 
-        // `GetTriangleMember` returns FAILURE if `row` or `col` was out of range.
-        unsigned int member;
-        if ( Pascal::GetTriangleMember(triangle, height, row, col, member) == SUCCESS ) {
-            std::cout << member << std::endl;
+        // `TriangleCheckPrime` returns `FAILURE` if number out of range. otherwise, `SUCCESS`.
+        bool isPrime;
+        if ( TriangleCheckPrime(triangle, height, number, isPrime) == SUCCESS ) {
+
+            // `isPrime` now holds if number is prime or not prime.
+            if ( isPrime ) {
+                std::cout << number << " is a prime number" << std::endl;
+            } else {
+                std::cout << number << " is not a prime number" << std::endl;
+            }
         }
-        // otherwise, we just printed out the value at 1-indexed `row` and `col`.
 
 
-        // `PollContinue` returns false if user didn't enter 'y' to continue.
+        // `PollContinue` returns false if user does not want to continue.
         if ( not PollContinue() ) {
             break;
         }
     }
 
 
-    // always make sure we free the dynamically allocated memory.
+    // always free dynamically allocated memory.
     Pascal::FreeTriangle(triangle, height);
 
-
-    // and if we make it here, return exit code 0 for success.
+    
+    // and return exit code 0 for success.
     std::cout << "Exiting program..." << std::endl;
     return SUCCESS;
 }
