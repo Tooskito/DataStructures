@@ -143,7 +143,8 @@ size_t LongestIncreasingSubsequenceLength(const std::vector<T> & deck) {
 
     // piles.size() is the length of the maximum increasing subsequence.
     // because, if you look at one pile, cards that are stacked on top are
-    // newer with smaller value. ergo, an increasing subsequence can only
+    // newer with smaller value (they form decreasing subsequences within
+    // the input array). ergo, an increasing subsequence can only
     // use one card from each pile.
     return piles.size();
 }
