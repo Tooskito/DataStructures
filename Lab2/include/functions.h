@@ -119,6 +119,9 @@ void OverwriteOrAppend(std::vector<T> & vec, size_t index, T elem) {
  *  And since the maximum length for an increasing subsequence is limited by the length of the input
  *  vector, this algorithm has O(n) space complexity.
  *  
+ *  Note 2: This algorithm looks for STRICTLY INCREASING subsequences. i.e. ['e', 'e', 'e'] would
+ *  return a maximum increasing subsequence length of 1.
+ *  
  *  @param deck The vector in which the length of the longest increasing subsequence will be found.
  *  @return An integer denoting the length of the longest increasing subsequence in the given vector.
  */

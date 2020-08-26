@@ -65,12 +65,16 @@ int main() {
     std::cout << "----------------------" << std::endl;
 
 
-    // test string by passing string's properties to vector. CREATED #1 STRING
-    std::string MyString = "The last thing you'd want in your Burger King burger is someone's foot fungus. But as it turns out, that might be what you get.";
-    std::vector<char> StringTest(MyString.begin(), MyString.end());
+    // test string.
+    std::vector<std::string> StringTest{
+        "Number", "15:", "Burger", "King", "foot", "lettuce.",
+        "The", "last", "thing", "you", "want", "in", "your", "burger", "king", "burger",
+        "is", "somebody's", "fungus.", 
+        "But", "as", "it", "turns", "out,", "that", "might", "be", "what", "you", "get."
+    };
     std::cout << "String Test:" << std::endl;
     std::cout << "Array to Test for LIS\t: ";
-    PrintVector(StringTest, false);
+    PrintVector(StringTest);
     std::cout << "Result: " << LongestIncreasingSubsequenceLength(StringTest) << std::endl;
     std::cout << "----------------------" << std::endl;
 
