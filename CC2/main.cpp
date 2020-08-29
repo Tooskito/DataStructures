@@ -1,137 +1,82 @@
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <string>
-#include <limits>
 
-/**
- *  Prints a given vector.
- *  
- *  @param vec The vector to be printed.
- */
-template<class T>
-void printv(const std::vector<T> & vec) {
-
-    // Loop through each element and print them.
-    for (T elem : vec) {
-        std::cout << elem << " ";
-    }
-
-    // Print a newline.
-    std::cout << std::endl;
-}
-
-/**
- *  Given a vector and two indices, swap the contents at the indices.
- *  
- *  @param vec The vector in question.
- *  @param a The index of one element.
- *  @param b The index of another element.
- */
-template<class T>
-void swapvp(std::vector<T> & vec, size_t a, size_t b) {
-
-    // Do the swap.
-    T temp = vec.at(a);
-    vec.at(a) = vec.at(b);
-    vec.at(b) = temp;
-}
-
-
-/**
- *  Returns an index of an element that is placed in its correct place in the final vector.
- *  All elements to its left are less than it, and all elements to its right are greater.
- *  A vital component of quicksort.
- *  
- *  @param vec The vector in question.
- *  @param start The start index (inclusive) of the sorting interval.
- *  @param end The ending index (inclusive) of the sorting interval.
- *  @return An index of an element that is placed in its final and correct position.
- */
-template <class T>
-size_t partition(std::vector<T> & vec, size_t start, size_t end) {
-    
-    // Store pivot as a temp variable.
-    T pivot = vec.at(start);
-
-    // Initialize left and right pointers.
-    size_t l = start, r = end;
-
-
-    // Do this while the pointers have not crossed.
-    while (l < r) {
-
-        // Move right pointer until we find an element that is less than pivot.
-        while (vec.at(r) > pivot and l < r) {
-            --r;
-        }
-
-        // Swap it with the left pointer.
-        swapvp(vec, l, r);
-        
-
-        // Likewise, move left pointer until we find an element that is greater than pivot.
-        while (vec.at(l) <= pivot and l < r) {
-            ++l;
-        }
-
-        // Then, swap it with the right pointer.
-        swapvp(vec, l, r);
-    }
-
-
-    // The pointers should now be equal to each other, and hovering over the pivot.
-    vec.at(l) = pivot;
-    return l;
-}
-
-
-/**
- *  Implements the QuickSort algorithm that runs in O(nlogn) in best case and O(n2) in worse case.
- *  Sorts a given vector within a given interval.
- * 
- *  @param vec The vector to be sorted.
- *  @param start The starting index (inclusive) of the interval to be sorted.
- *  @param end The ending index (inclusive) of the interval to be sorted.
- */
-template <class T>
-void quicksort(std::vector<T> & vec, size_t start, size_t end) {
-
-
-    // Do not partition invalid parameters start >= end.
-    if (start < end) {
-
-
-        size_t partition_index = partition(vec, start, end);
-
-
-        // Protect from overflow by not sorting left of partition if will overflow.
-        if (partition_index != std::numeric_limits<size_t>::min())
-            quicksort(vec, start, partition_index - 1);
-        
-
-        // Protect from overflow by not sorting right of index if will overflow.
-        if (partition_index != std::numeric_limits<size_t>::max())
-            quicksort(vec, partition_index + 1, end);
-    }
-}
-
-
-/**
- *  Sorts a given vector using the QuickSort algorithm.
- * 
- *  @param vec The vector to be sorted.
- */
-template <class T>
-void quicksort(std::vector<T> & vec) {
-    quicksort(vec, 0, vec.size() - 1);
-}
-
+#include "Quick.h"
 
 int main() {
-    std::string str = "GARFIELDYOUARESOFATWHYAREYOUSOBIGANDFAT";
-    std::vector<char> vec(str.begin(), str.end());
-    printv(vec);
-    quicksort(vec);
-    printv(vec);
+
+
+    // Test using an odd-length character vector.
+    std::string OddCharString = "THECORONAVIRUSSUCKS";
+    std::vector<char> OddCharVector(OddCharString.begin(), OddCharString.end());
+
+    std::cout << "Initial is:\t";
+    PrintVector(OddCharVector);
+
+    std::cout << "Final is:\t";
+    Quick::Sort(OddCharVector);
+    PrintVector(OddCharVector);
+
+    std::cout << std::endl;
+
+
+    // Test using an odd-length integer vector.
+    std::vector<int> IntVector{
+        22, 13, 33, 44, -10, 55, 88, 27
+    };
+
+    std::cout << "Initial is:\t";
+    PrintVector(IntVector);
+
+    std::cout << "Final is:\t";
+    Quick::Sort(IntVector);
+    PrintVector(IntVector);
+
+    std::cout << std::endl;
+
+
+    // Test using an even-length unsigned integer vector.
+    std::vector<unsigned int> UnsignedIntVector{
+        14, 99, 42, 77, 2, 66, 1, 8, 44
+    };
+
+    std::cout << "Initial is:\t";
+    PrintVector(UnsignedIntVector);
+
+    std::cout << "Final is:\t";
+    Quick::Sort(UnsignedIntVector);
+    PrintVector(UnsignedIntVector);
+
+    std::cout << std::endl;
+
+
+    // Test using an even-length character vector.
+    std::string EvenCharString = "Notre Dame";
+    std::vector<char> EvenCharVector(EvenCharString.begin(), EvenCharString.end());
+
+    std::cout << "Initial is:\t";
+    PrintVector(EvenCharVector);
+
+    std::cout << "Final is:\t";
+    Quick::Sort(EvenCharVector);
+    PrintVector(EvenCharVector);
+
+    std::cout << std::endl;
+
+
+    // Test using an odd-length string vector.
+    std::vector<std::string> OddStringVector{
+        "Data", "Structures", "Creativity", "Challenge", "2"
+    };
+
+    std::cout << "Initial is:\t";
+    PrintVector(OddStringVector);
+
+    std::cout << "Final is:\t";
+    Quick::Sort(OddStringVector);
+    PrintVector(OddStringVector);
+
+
     return 0;
 }
