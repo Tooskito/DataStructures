@@ -4,6 +4,9 @@
 #include <ctime>        // std::time
 #include <cstdlib>      // std::srand
 
+#ifndef CC2_QUICK_H_
+#define CC2_QUICK_H_
+
 /**
  *  Prints a given vector.
  *  
@@ -129,11 +132,13 @@ namespace Quick {
     template <class T>
     void Sort(std::vector<T> & vec) {
         
-        std::srand( unsigned ( std::time(NULL) ) );
+        // Seed random generator and shuffle to average out worst case.
+        std::srand(unsigned( std::time(0) ));
         std::random_shuffle(vec.begin(), vec.end());
-        PrintVector(vec);
         
         // Now, call QuickSort.
         Sort(vec, 0, vec.size() - 1);
     }
 }
+
+#endif
