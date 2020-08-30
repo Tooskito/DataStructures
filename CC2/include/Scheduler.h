@@ -1,8 +1,22 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+/**
+ *  @author Jonathan Abbott
+ *  @date   Aug 30, 2020
+ * 
+ *  This file includes all the implementation details for the scheduling algorithm that
+ *  uses QuickSort for CC2.
+ */
 
-#include "Quick.h"
+
+#include <iostream> // std::ostream
+#include <vector>   // std::vector
+#include <queue>    // std::priority_queue
+
+#include "Quick.h"  // Quick::Sort
+
+
+// Classic define guards to avoid multiple-definition.
+#ifndef CC2_SCHEDULER_H_
+#define CC2_SCHEDULER_H_
 
 
 /**
@@ -66,6 +80,8 @@ namespace Scheduler {
     void Balance(std::vector<Processor> & processors, std::vector<uint64_t> & tasks) {
         
         // First, create priority queue with processors param.
+        // Ideally, the processors would already be in a priority queue. But this is a
+        // proof-of-concept.
         std::priority_queue<Processor, std::vector<Processor>, std::greater<Processor>> pq(
             processors.begin(), processors.end()
         );
@@ -91,6 +107,8 @@ namespace Scheduler {
 
 
         // Now, overwrite processors with new information.
+        // Note, this is only done because this is a proof-of-concept! Obviously,
+        // this is inefficient.
         processors.clear();
         while (not pq.empty()) {
             processors.push_back(pq.top());
@@ -98,3 +116,5 @@ namespace Scheduler {
         }
     }
 }
+
+#endif

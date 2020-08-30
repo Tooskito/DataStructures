@@ -1,11 +1,22 @@
+/**
+ *  @author Jonathan Abbott
+ *  @date   Aug 30, 2020
+ *  
+ *  This file includes all the implementation details regarding QuickSort for CC2 for CSE 20312.
+ */
+
+
 #include <iostream>     // std::cout
 #include <vector>       // std::vector
 #include <algorithm>    // std::random_shuffle
 #include <ctime>        // std::time
 #include <cstdlib>      // std::srand
 
+
+// Classic define guards to avoid multiple-definition.
 #ifndef CC2_QUICK_H_
 #define CC2_QUICK_H_
+
 
 /**
  *  Prints a given vector.
