@@ -19,8 +19,8 @@ OBJ := obj
 EXE := exe
 
 
-##	Fundamental
-# 	Command: make Fundamental
+##	Lab3
+# 	Command: make Lab3
 Lab3Objs := $(OBJ)/Lab3.o
 
 Lab3: $(Lab3Objs)
