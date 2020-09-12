@@ -87,7 +87,7 @@ class HashTable{
 		}
 
 		// Return Hash Location
-		long unsigned int findPos( const Key& theKey ) const{
+		virtual long unsigned int findPos( const Key& theKey ) const{
 			
 			long unsigned int currentPos;
 			long unsigned int iter = 0;
@@ -239,11 +239,12 @@ class HashTable{
 			
 		}
 	
+		
 		// Overloaded Friend Operator
 		friend std::ostream& operator<<( std::ostream& output, const HashTable<Key, Value>& theTable ){
-			
-			output << "Hash Table Size: " << theTable.array.size() << std::endl;
-			output << "Hashed Elements: " << theTable.numHash << std::endl;
+			output << "Linear Hash Results:" << std::endl;
+			output << "# of Hashed Elements: " << theTable.numHash << " ";
+			output << "Hash Capacity: " << theTable.array.size() << std::endl;
 			
 			for(unsigned int iter = 0; iter < theTable.array.size(); iter++){
 				
@@ -269,7 +270,6 @@ class HashTable{
 				output << theTable.array[iter].value << "}" << std::endl;
 				
 			}
-			
 			return output;
 		}
 };
