@@ -1,5 +1,14 @@
+/**
+ *  @author Jonathan Abbott
+ *  @date   Sep 13, 2020
+ * 
+ *  Includes tests for `DoubleHash.h` for CC3 for CSE 20312.
+ */
+
 #include <iostream>
+#include "../include/LinearProbe.h"
 #include "../include/DoubleHash.h"
+
 int main()
 {
     // Create two tables, hash same three elements.

@@ -1,9 +1,23 @@
-#include <iostream>
-#include <vector>
-#include <string>
+/**
+ *  @author Jonathan Abbott
+ *  @date   Sep 13, 2020
+ * 
+ *  Includes declarations and definitions of the crucial components of a
+ *  hypothetical filesystem, greatly inspired by the UNIX filesystem.
+ */
 
-#include "DoubleHash.h"
-#define IDTYPE int
+
+// Standard include guards.
+#ifndef FILESYSTEM_H
+#define FILESYSTEM_H
+
+
+#include <iostream> // std::ostream, std::cout
+#include <vector>   // std::vector
+#include <string>   // std::string
+
+#include "DoubleHash.h" // DoubleHash<Key, Value>
+#define IDTYPE int      // So that the IDTYPE can be changed.
 
 
 /**
@@ -32,17 +46,18 @@ private:
     unsigned int size;
 public:
     // Constructor and destructors.
-    FileINode() : INode(), size(0), data("") {}
+    FileINode() : INode(), data(""), size(0) {}
     FileINode(std::string inString) 
-        : INode(), data(inString), size(inString.size()) {}
+        : INode(), data(inString), size( (unsigned int)inString.size() ) {}
     virtual ~FileINode() {}
 
+    // Getter and setters.
     std::string& getData() { return data; }
     unsigned int getSize() const { return size; }
     void write(std::string inData)
     { 
         data = inData; 
-        size = inData.size(); 
+        size = (unsigned int)inData.size(); 
     } 
 };
 
@@ -65,8 +80,6 @@ public:
 class DirINode : public INode
 {
 private:
-    DirINode* parent;
-
     std::vector<FileINode> files;
     DoubleHash<IDTYPE, std::string> fileNames;
 
@@ -74,13 +87,12 @@ private:
     DoubleHash<IDTYPE, std::string> dirNames;
 public:
     // Constructor and destructor.
-    DirINode() : INode(), parent(nullptr) {} 
+    DirINode() 
+        : INode(), files(), fileNames(), dirs(), dirNames() {}
     virtual ~DirINode() {}
 
 
     // Some auxiliary getter-setter functions.
-    DirINode* getParent() { return parent; }
-    void setParent(DirINode* inParent) { parent = inParent; }
     std::vector<FileINode>& getFiles() { return files; }
     std::vector<DirINode>& getDirs() { return dirs; }
     DoubleHash<IDTYPE, std::string>& getFileNames() { return fileNames; }
@@ -105,7 +117,6 @@ public:
      */
     void addDir(std::string name, DirINode dir)
     {
-        dir.setParent(this);
         dirs.push_back(dir);
         dirNames.insert(std::pair<IDTYPE, std::string>{dir.id, name});
     }
@@ -120,7 +131,7 @@ public:
         }
         // Print all the files.
         for (const FileINode& f : dir.files) {
-            os << f.id << "\tfile\t" << f.getSize() << "\t" << dir.fileNames[f.id] << std::endl;
+            os << f.id << "\tfile\t" << f.getSize() << "B\t" << dir.fileNames[f.id] << std::endl;
         }
         return os;
     }
@@ -138,9 +149,13 @@ private:
     // `root` is so that `User` is able to return to where it began.
     DirINode* root;
     DirINode* cwd;
+    std::string cwdPath;
 public:
-    User(DirINode& inCwd) : root(&inCwd), cwd(&inCwd) {}
-
+    User(DirINode& inCwd) : root(&inCwd), cwd(&inCwd), cwdPath("/") {}
+    User(const User& other) : root(other.root), cwd(other.cwd), cwdPath(other.cwdPath) {}
+    User& operator=(const User& other) {
+        return *this = User(other);
+    }
 
     /**
      *  Creates an empty directory in the cwd.
@@ -153,7 +168,7 @@ public:
         {
             if (name == cwdDirNames[d.id])
             {
-                std::cerr << name << " already exists." << std::endl;
+                std::cerr << "Could not create " << name << "/ because it already exists." << std::endl;
                 return;
             }
         }
@@ -192,17 +207,7 @@ public:
      */
     bool cd(std::string name)
     {
-        // Return to parent.
-        if (name == "..")
-        {
-            if (cwd->getParent() != nullptr)
-            {
-                cwd = cwd->getParent();
-                return true;
-            }
-        
-        // Do nothing.
-        } else if (name == ".") {
+        if (name == ".") {
             return true;
         
         // Search through numerical inodes and their names and check if a match is made.
@@ -212,14 +217,22 @@ public:
             {
                 if (name == cwdDirNames[d.id])
                 {
+                    cwdPath = cwdPath + name + "/";
                     cwd = &d;
                     return true;
                 }
             }
             return false;
         }
+        return false;
     }
 
+    // Returns cwd to where `User` was initialized.
+    void cd()
+    {
+        cwdPath = "/";
+        cwd = root;
+    }
 
     /**
      *  Writes given contents to `filename` if `filename` exists in the cwd.
@@ -236,6 +249,7 @@ public:
                 return true;
             }
         }
+        std::cerr << "Could not write to " << filename << " because it does not exist." << std::endl;
         return false;
     }
 
@@ -259,24 +273,14 @@ public:
     }
 
 
-    // Returns cwd to where `User` was initialized.
-    void cd()
-    {
-        cwd = root;
-    }
-
-
     /**
      *  Prints out contents of the `cwd`.
      */
     void ls()
     {
-        if (cwd->getParent() == nullptr) {
-            std::cout << "Contents of dir /" << std::endl;
-        } else {
-            std::cout << "Contents of dir " << cwd->getParent()->getDirNames()[cwd->id] << std::endl;
-        }
+        std::cout << "[Contents of dir " << cwdPath << "]" << std::endl;
         std::cout << (*cwd) << std::endl;
     }
-
 };
+
+#endif

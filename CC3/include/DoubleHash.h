@@ -1,12 +1,31 @@
-#include <iostream>
-#include <string>
+/**
+ *  @author Jonathan Abbott
+ *  @date   Sep 13, 2020
+ *  
+ *  Includes declaration and definition of a double-hashing hash-table.
+ */
 
-#include "LinearProbe.h"
+// Standard include guards.
+#ifndef DOUBLEHASH_H
+#define DOUBLEHASH_H
 
+
+#include <iostream>         // std::ostream
+#include <string>           // std::string
+#include "LinearProbe.h"    // HashTable<Key, Value>
+
+
+/**
+ *  Inherits from LinearProbe HashTable but modifies it such that each entry
+ *  goes through two hashing functions to determine where it is placed in the
+ *  HashTable.
+ */
 template <class Key, class Value>
 class DoubleHash : public HashTable<Key, Value> {
 protected:
 
+
+    // Second hash function that takes an integer.
     long unsigned int HashFunc2(const int& keyToTranslate) const
     {
         if (keyToTranslate < 0){
@@ -17,6 +36,7 @@ protected:
     }
 
     
+    // Second hash function that takes a string.
     long unsigned int HashFunc2(const std::string& keyToTranslate) const
     {
         return (long unsigned int)(3 - keyToTranslate.size() % 3);
@@ -24,16 +44,20 @@ protected:
 
 
 public:
+    // Standard constructor and destructor.
     DoubleHash(const unsigned int size = 0) : HashTable<Key, Value>(size) {}
     virtual ~DoubleHash() {}
 
 
+    // Overwrite parent's definition of `findPos`.
     long unsigned int findPos( const Key& theKey ) const
     {
         
         long unsigned int currentPos;
         long unsigned int iter = 1;
-        const unsigned int STEPSIZE = HashFunc2( theKey );
+
+        // But instead we change the stepsize to the second hashing function.
+        const long unsigned int STEPSIZE = HashFunc2( theKey );
         
         do{
             // Hash Function determines current position
@@ -89,3 +113,5 @@ public:
         return output;
     }
 };
+
+#endif
