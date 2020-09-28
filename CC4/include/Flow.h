@@ -58,7 +58,7 @@ namespace Flow {
                 // even can be flooded.
                 if (0 <= newi and newi < m and 0 <= newj and newj < n // If new index is within bounds,
                     and floodMap.at(newi).at(newj) != 1 // And new index isn't already flooded,
-                    and map.at(i).at(j) <= map.at(newi).at(newj)) 
+                    and map.at(i).at(j) <= map.at(newi).at(newj)) // And the height could have flown from new index to here,
                 {
                         floodMap.at(newi).at(newj) = 1;
                         queue.push({newi, newj});
@@ -78,11 +78,11 @@ namespace Flow {
         // 1s are where water can flow from there to the top-left edge. 0s are not.
         vv_t floodMap(m, v_t(n, 0));
         for (int i = 0; i < m; ++i) {
-            floodMap.at(i).at(0) = 1;
+            floodMap.at(i).at(0) = 1; // Set top and left edges because they are touching.
             PacificAtlantic_BFS(map, floodMap, i, 0);
         }
         for (int j = 0; j < n; ++j) {
-            floodMap.at(0).at(j) = 1;
+            floodMap.at(0).at(j) = 1; // Set top and left edges because they are touching.
             PacificAtlantic_BFS(map, floodMap, 0, j);
         }
         // Check bottom-right edges for solution.

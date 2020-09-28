@@ -17,7 +17,7 @@ OBJ := obj
 EXE := exe
 
 
-# Command: make Prob1
+# Command: make Prob2
 Prob2Objs := $(OBJ)/Prob2.o
 
 Prob2 : $(Prob2Objs)
