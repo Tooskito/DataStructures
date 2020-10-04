@@ -16,6 +16,15 @@ SRC := src
 OBJ := obj
 EXE := exe
 
+# Command: make SorDLLTest
+SorDLLTestObjs := $(OBJ)/SorDLLTest.o
+
+SorDLLTest : $(SorDLLTestObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/SorDLLTest $(SorDLLTestObjs)
+	$(EXE)/./SorDLLTest 5 10 12 6 7 1 0 3
+
+$(OBJ)/SorDLLTest.o : $(SRC)/SorDLLTest.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/SorDLLTest.cpp -o $@
 
 # Command: make Fundamental
 FundamentalObjs := $(OBJ)/Fundamental.o
@@ -26,6 +35,16 @@ Fundamental : $(FundamentalObjs)
 
 $(OBJ)/Fundamental.o : $(SRC)/Fundamental.cpp $(INC)/Priority.h
 	$(PP) $(CXXFLAGS) -c $(SRC)/Fundamental.cpp -o $@
+
+# Command: make Creative
+CreativeObjs := $(OBJ)/Creative.o
+
+Creative : $(CreativeObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Creative $(CreativeObjs)
+	$(EXE)/./Creative
+
+$(OBJ)/Creative.o : $(SRC)/Creative.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
 
 # Make all
 all: Fundamental

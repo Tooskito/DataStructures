@@ -36,13 +36,13 @@ class DLList{
 			* Terminates program if not to prevent stack overfloe 
 			********************************************/
 			void checkMemory(){
-				
+				/*
 				if (this == NULL)
 				{
 					std::cerr <<  "Out of Memory" << std::endl;
 					exit (-1);
 				} 
-				
+				*/
 			}
 			
 			/********************************************
