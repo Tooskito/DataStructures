@@ -49,6 +49,8 @@ $(OBJ)/Creative.o : $(SRC)/Creative.cpp
 # Make all
 all: SorDLLTest PQTest Creative
 
+# Make Fundamental
+Fundamental: SorDLLTest PQTest
 
 # make initialize
 initialize: 
