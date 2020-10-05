@@ -26,15 +26,15 @@ SorDLLTest : $(SorDLLTestObjs)
 $(OBJ)/SorDLLTest.o : $(SRC)/SorDLLTest.cpp
 	$(PP) $(CXXFLAGS) -c $(SRC)/SorDLLTest.cpp -o $@
 
-# Command: make Fundamental
-FundamentalObjs := $(OBJ)/Fundamental.o
+# Command: make PQTest
+PQTestObjs := $(OBJ)/PQTest.o
 
-Fundamental : $(FundamentalObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/Fundamental $(FundamentalObjs)
-	$(EXE)/./Fundamental
+PQTest : $(PQTestObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/PQTest $(PQTestObjs)
+	$(EXE)/./PQTest
 
-$(OBJ)/Fundamental.o : $(SRC)/Fundamental.cpp $(INC)/Priority.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/Fundamental.cpp -o $@
+$(OBJ)/PQTest.o : $(SRC)/PQTest.cpp $(INC)/Priority.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/PQTest.cpp -o $@
 
 # Command: make Creative
 CreativeObjs := $(OBJ)/Creative.o
@@ -47,7 +47,7 @@ $(OBJ)/Creative.o : $(SRC)/Creative.cpp
 	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
 
 # Make all
-all: Fundamental
+all: SorDLLTest PQTest Creative
 
 
 # make initialize

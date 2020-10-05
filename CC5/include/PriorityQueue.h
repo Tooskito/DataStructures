@@ -1,41 +1,78 @@
+// @author      Jonathan Abbott
+// @date        Oct 4th, 2020
+// @desc        This file defines a queue built on the first-in-priority-out principle.
+
+
 #ifndef PRIORITYQUEUE_H
 #define PRIORITYQUEUE_H
+
 
 #include "Priority.h"
 #include "SorDLList.h"
 
+
+// Implements a queue that operates on the first-in-priority-out principle.
+// Objects in the queue are type Priority<T>.
 template <class T>
 class PriorityQueue {
-    SorDLList<T> list;
-    unsigned int capacity;
-    unsigned int length;
+
+
+    SorDLList<Priority<T>> mList;
+    unsigned int mCapacity;
+    unsigned int mLength;
+
+
 public:
-    PriorityQueue() : list(), capacity(-1), length(0) {}
-    PriorityQueue(unsigned int max) : list(), capacity(max), length(0) {}
-    void push(T elem) {
-        if (length < capacity) {
-            list.Insert(elem);
-            ++length;
+
+
+    // Default constructor and another constructor.
+    PriorityQueue() : mList(), mCapacity(-1), mLength(0) {}
+    PriorityQueue(unsigned int max) : mList(), mCapacity(max), mLength(0) {}
+    // There is no destructor because when this goes out of scope it also destroys the DLList automatically.
+
+
+    // Pushes a Priority element into the queue.
+    void push(Priority<T> elem) {
+        if (mLength < mCapacity) {
+            mList.Insert(elem);
+            ++mLength;
         }
     }
+
+
+    // Removes the highest-priority element off of the queue.
     void pop() {
-        if (length > 0) {
-            list.pop_front();
-            --length;
+        if (mLength > 0) {
+            mList.pop_front();
+            --mLength;
         }
     }
-    T top() {
-        return list.front();
+
+
+    // Gets the highest-priority element on the queue.
+    Priority<T> top() {
+        return mList.front();
     }
+
+
+    // Returns the max size of the queue, a.k.a. the maximum number of elements.
     unsigned int max_size() const {
-        return capacity;
+        return mCapacity;
     }
+
+
+    // Returns the length of the queue.
     unsigned int size() const {
-        return length;
+        return mLength;
     }
+
+
+    // Returns true if the queue is empty a.k.a. has no elements.
     bool empty() const {
-        return length == 0;
+        return mLength == 0;
     }
+
+
 };
 
 #endif

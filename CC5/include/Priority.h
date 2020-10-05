@@ -1,37 +1,73 @@
+// @author      Jonathan Abbott
+// @date        Oct 4th, 2020
+// @desc        This file file defines a class that is compared by its `priority` member variable, and not by
+//              it's `value` member variable.
+
+
 #ifndef PRIORITY_H
 #define PRIORITY_H
 
-#include <iostream>
 
+#include <iostream> // std::cout
+
+
+// This class encapsulates two values, mValue and mPriority, and compares to other Priorities by mPriority.
 template <class T>
 class Priority {
-    T value;
-    unsigned int priority;
+
+
+    // Preceded member variables with `m` so that we can use methods with i.e. `value`, `priority`.
+    T mValue;
+    unsigned int mPriority;
+
+
 public:
-    // Constructors.
-    Priority() : value(), priority(0) {}
-    Priority(T inValue, uint inPriority) : value(inValue), priority(inPriority) {}
+
+
+    // Default constructor and another constructor.
+    Priority() : mValue(), mPriority(0) {}
+    Priority(T inValue, uint inPriority) : mValue(inValue), mPriority(inPriority) {}
+
+    // Copy constructor.
+    Priority(const Priority<T>& other) : mValue(other.mValue), mPriority(other.mPriority) {}
+
+
     // Destructor.
     ~Priority() {}
+    
+
     // Copy assignment operator.
-    Priority& operator=(const Priority& assign) { 
+    Priority& operator=(const Priority<T>& assign) {
+        // Don't try to assign this to itself. 
         if (this != &assign) {
-            this->value = assign.value;
-            this->priority = assign.priority;
+            this->mValue = assign.mValue;
+            this->mPriority = assign.mPriority;
         }
         return *this;
     }
-    // Overload ostream operator.
-    friend std::ostream& operator<<(std::ostream& os, const Priority& other) {
-        os << "{" << other.value << ", " << other.priority << "}";
+    
+
+    // Overload ostream operator so we can print out this object.
+    friend std::ostream& operator<<(std::ostream& os, const Priority<T>& other) {
+        os << "{" << other.mValue << ", " << other.mPriority << "}";
         return os;
     }
-    // Comparison operators.
-    bool operator>(const Priority& other) const { return this->priority > other.priority; }
-    bool operator>=(const Priority& other) const { return this->priority >= other.priority; }
-    bool operator<(const Priority& other) const { return this->priority < other.priority; }
-    bool operator<=(const Priority& other) const { return this->priority <= other.priority; }
-    bool operator==(const Priority& other) const { return this->priority == other.priority; }
+    
+
+    // Getter methods, remember how we preceded variable names with `m` for member.
+    T value() { return mValue; }
+    unsigned int priority() { return mPriority; }
+    
+
+    // Overload comparison operators to compare by priority, not value.
+    bool operator>(const Priority<T>& other) const { return this->mPriority > other.mPriority; }
+    bool operator>=(const Priority<T>& other) const { return this->mPriority >= other.mPriority; }
+    bool operator<(const Priority<T>& other) const { return this->mPriority < other.mPriority; }
+    bool operator<=(const Priority<T>& other) const { return this->mPriority <= other.mPriority; }
+    bool operator==(const Priority<T>& other) const { return this->mPriority == other.mPriority; }
+
+
 };
+
 
 #endif

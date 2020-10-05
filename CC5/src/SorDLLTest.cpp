@@ -1,5 +1,11 @@
-#include <iostream>
-#include "../include/SorDLList.h"
+// @author      Jonathan Abbott
+// @date        Oct 4th, 2020
+// @desc        This file implements the tests for `SorDLLTest<T>`, taken from Prof. Morrison.
+
+
+#include <iostream> // std::cout, std::endl
+#include "../include/SorDLList.h" // SorDLList<T>
+
 
 int check(const char* argv) {
     for (int i = 0; i < argv[i]; ++i) {
@@ -14,12 +20,16 @@ int check(const char* argv) {
     return atoi(argv);
 }
 
+
 int main(int argc, char** argv) {
+
+    // If there are no integer arguments...
     if (argc < 2) {
         std::cerr << "At least one integer is required" << std::endl;
         exit(EXIT_FAILURE);
     }
 
+    /* Add integer arguments, after verifying that they are valid, to SorDLList. */
     int len = argc - 1;
     SorDLList<int> list;
 
@@ -30,13 +40,17 @@ int main(int argc, char** argv) {
         std::cout << "list: " << list << std::endl;
     }
     
-    int num;
 
+    /* Query user until they deletes all values. */
+    int num;
     while (not list.IsEmpty()) {
         std::cout << std::endl << "Enter a value to be deleted: ";
         std::cin >> num;
         list.Delete(num);
         std::cout << "list: " << list << std::endl;
     }
+
+
     return 0;
 }
+
