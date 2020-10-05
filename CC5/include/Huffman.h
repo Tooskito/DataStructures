@@ -3,8 +3,8 @@
 // @desc        This file includes the implementation details to Huffman-encode a string.
 
 
-#ifndef PRIORITYTREE_H
-#define PRIORITYTREE_H
+#ifndef HUFFMAN_H
+#define HUFFMAN_H
 
 
 #include <iostream> // std::cout, std::endl
