@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     int len = argc - 1;
     SorDLList<int> list;
 
-    for (int i = 1; i < len; ++i) {
+    for (int i = 1; i < len + 1; ++i) {
         int temp = check(argv[i]);
         std::cout << "Inserting " << temp << " into Linked List" << std::endl;
         list.Insert(temp);
